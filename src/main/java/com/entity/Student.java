@@ -26,6 +26,9 @@ public class Student {
 //    @ManyToMany(cascade = CascadeType.ALL)
 //    private List<Course> courses = new ArrayList<Course>();
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Course> courses = new ArrayList<Course>();
+
     public int getId() {
         return id;
     }
@@ -57,7 +60,14 @@ public class Student {
 //    public void setCourses(List<Course> courses) {
 //        this.courses = courses;
 //    }
+    
+    public List<Course> getCourses() {
+        return courses;
+    }
 
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
 
     @Override
     public boolean equals(Object o) {
