@@ -12,21 +12,19 @@ import java.util.List;
 @Entity
 public class Course {
 
-    public static final String FIND_ALL = "Issue.findAll";
+    public static final String FIND_ALL = "Course.findAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
-    @Column(nullable = true)
     private String name;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "start_date")
     private Date startDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "courses")
-    private List<Student> students = new ArrayList<Student>();
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    private List<Student> students = new ArrayList<Student>();
 
 
     public int getId() {
@@ -53,13 +51,14 @@ public class Course {
         this.startDate = startDate;
     }
 
-    public List<Student> getStudents() {
-        return students;
-    }
+//    public List<Student> getStudents() {
+//        return students;
+//    }
+//
+//    public void setStudents(List<Student> students) {
+//        this.students = students;
+//    }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -70,8 +69,7 @@ public class Course {
 
         if (id != course.id) return false;
         if (name != null ? !name.equals(course.name) : course.name != null) return false;
-        if (startDate != null ? !startDate.equals(course.startDate) : course.startDate != null) return false;
-        return students != null ? students.equals(course.students) : course.students == null;
+        return startDate != null ? startDate.equals(course.startDate) : course.startDate == null;
 
     }
 
@@ -80,7 +78,6 @@ public class Course {
         int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
-        result = 31 * result + (students != null ? students.hashCode() : 0);
         return result;
     }
 }

@@ -1,17 +1,16 @@
 package com.repository;
 
-import com.entity.Course;
+import com.entity.Student;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
-public class CourseRepository {
+public class StudentRepository {
 
     @PersistenceContext
     EntityManager em;
@@ -20,10 +19,11 @@ public class CourseRepository {
         this.em = em;
     }
 
-    public List<Course> getCourses(){
-        TypedQuery<Course> query = em.createNamedQuery(Course.FIND_ALL, Course.class);
+    public Collection<Student> getAll(){
+        TypedQuery query = em.createNamedQuery(Student.FIND_ALL, Student.class);
+        Collection<Student> results = query.getResultList();
 
-        return query.getResultList();
-
+        //return query.getResultList();
+        return results;
     }
 }
