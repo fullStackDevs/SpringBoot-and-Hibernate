@@ -23,8 +23,8 @@ public class Course {
     @Column(name = "start_date")
     private Date startDate;
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    private List<Student> students = new ArrayList<Student>();
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "courses")
+    private List<Student> students = new ArrayList<Student>();
 
 
     public int getId() {
@@ -51,13 +51,13 @@ public class Course {
         this.startDate = startDate;
     }
 
-//    public List<Student> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
 
 
     @Override
