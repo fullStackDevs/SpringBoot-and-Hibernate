@@ -1,0 +1,14 @@
+select * from course;
+insert into course values(1,'JPA', '11-21-2016');
+insert into course values(2,'Spring BOOT', '11-22-2016');
+insert into course values(3,'Photoshop', '11-20-2016');
+
+select * from student;
+insert into student values(1,'Popescu','Vlad');
+insert into student values(2,'Ionescu','Dan');
+insert into student values(3,'Matei','Ioan');
+insert into student values(4,'Cristea','Andreea');
+insert into student values(5,'Fring','Maria');
+
+select * from student_courses;
+insert into student 

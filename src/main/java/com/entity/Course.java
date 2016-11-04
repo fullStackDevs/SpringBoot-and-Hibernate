@@ -25,6 +25,9 @@ public class Course {
     @Column(name = "start_date")
     private Date startDate;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "courses")
+    private List<Student> students = new ArrayList<Student>();
+
 
     public int getId() {
         return id;
@@ -50,5 +53,34 @@ public class Course {
         this.startDate = startDate;
     }
 
+    public List<Student> getStudents() {
+        return students;
+    }
 
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Course course = (Course) o;
+
+        if (id != course.id) return false;
+        if (name != null ? !name.equals(course.name) : course.name != null) return false;
+        if (startDate != null ? !startDate.equals(course.startDate) : course.startDate != null) return false;
+        return students != null ? students.equals(course.students) : course.students == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
+        result = 31 * result + (students != null ? students.hashCode() : 0);
+        return result;
+    }
 }
