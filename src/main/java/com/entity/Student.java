@@ -1,17 +1,22 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @NamedQueries({
-        @NamedQuery(name = Student.FIND_ALL, query = "select s from Student s order by s.firstName")
+        @NamedQuery(name = Student.FIND_ALL, query = "select s from Student s order by s.firstName"),
+        @NamedQuery(name = Student.FIND_BY_ID, query = "select s from Student s where s.id = ?1")
 })
 
 @Entity
 public class Student {
 
     public static final String FIND_ALL = "Student.findAll";
+    public static final String FIND_BY_ID = "Student.getById";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +28,10 @@ public class Student {
     @Column(nullable = false, name = "last_name")
     private String lastName;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    private List<Course> courses = new ArrayList<Course>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany
+    @JsonManagedReference
     private List<Course> courses = new ArrayList<Course>();
 
     public int getId() {
@@ -53,14 +58,6 @@ public class Student {
         this.lastName = lastName;
     }
 
-//    public List<Course> getCourses() {
-//        return courses;
-//    }
-//
-//    public void setCourses(List<Course> courses) {
-//        this.courses = courses;
-//    }
-
     public List<Course> getCourses() {
         return courses;
     }
@@ -68,6 +65,7 @@ public class Student {
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
+
 
     @Override
     public boolean equals(Object o) {

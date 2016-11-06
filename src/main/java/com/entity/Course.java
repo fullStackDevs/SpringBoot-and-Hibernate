@@ -1,18 +1,25 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @NamedQueries({
-        @NamedQuery(name = Course.FIND_ALL, query = "select c from Course c")
+        @NamedQuery(name = Course.FIND_ALL, query = "select c from Course c"),
+        @NamedQuery(name = Course.FIND_BY_ID, query = "select c from Course c where c.id = ?1")
+
 })
 
 @Entity
 public class Course {
 
     public static final String FIND_ALL = "Course.findAll";
+    public static final String FIND_BY_ID = "Course.findById";
+    public static final String FIND_ENROLLED_STUDENTS = "Course.findEnrolledStudents";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,6 +31,7 @@ public class Course {
     private Date startDate;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "courses")
+    @JsonBackReference
     private List<Student> students = new ArrayList<Student>();
 
 

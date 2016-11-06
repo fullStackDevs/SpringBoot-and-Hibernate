@@ -19,5 +19,13 @@ public class StudentService {
         return resutls;
     }
 
+    public Student getStudentById(int id){
+        return studentRepository.getStudentById(id);
+    }
 
+    public void removeStudentById(int id) {
+        if(getStudentById(id) != null){
+            studentRepository.removeStudentById(id);
+        }
+    }
 }
