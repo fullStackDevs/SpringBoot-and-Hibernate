@@ -1,7 +1,9 @@
 package com.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,8 +32,11 @@ public class Student {
 
 
 
-    @ManyToMany
-    @JsonManagedReference
+    @ManyToMany(cascade = CascadeType.ALL)
+    //@JsonManagedReference
+//    @JsonIdentityInfo(
+//            generator = ObjectIdGenerators.PropertyGenerator.class,
+//            property = "id")
     private List<Course> courses = new ArrayList<Course>();
 
     public int getId() {

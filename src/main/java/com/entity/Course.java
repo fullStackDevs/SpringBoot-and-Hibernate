@@ -1,7 +1,6 @@
 package com.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,8 +29,12 @@ public class Course {
     @Column(name = "start_date")
     private Date startDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "courses")
-    @JsonBackReference
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "courses")
+    //@JsonBackReference
+//    @JsonIdentityInfo(
+//            generator = ObjectIdGenerators.PropertyGenerator.class,
+//            property = "id")
+    @JsonIgnore
     private List<Student> students = new ArrayList<Student>();
 
 

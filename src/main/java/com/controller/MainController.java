@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.entity.Car;
 import com.entity.Course;
 import com.entity.Student;
 import com.service.CourseService;
@@ -55,9 +56,27 @@ public class MainController {
         studentService.removeStudentById(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/student", method = RequestMethod.PUT)
     public void updateStudent(@RequestBody Student student){
         studentService.updateStudent(student);
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public void insertStudent(@RequestBody Student st){
+        studentService.insertStudent(st);
+    }
+
+    @RequestMapping(value = "/dcar", method = RequestMethod.GET)
+    public Car getDummyCar(){
+        Car c = new Car();
+        c.setId(1);
+        c.setModel("Test model");
+        return c;
+    }
+
+    @RequestMapping(value = "/createCar", method = RequestMethod.POST)
+    @ResponseBody public void createCar(@RequestBody Student s){
+        System.out.println("Creating car...");
     }
 
 

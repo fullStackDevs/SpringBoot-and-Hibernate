@@ -44,4 +44,8 @@ public class StudentRepository {
     public void updateStudent(Student student) {
         em.merge(student);
     }
+
+    public void insertStudent(Student student) {
+        em.persist(student);
+    }
 }

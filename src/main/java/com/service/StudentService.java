@@ -32,4 +32,8 @@ public class StudentService {
     public void updateStudent(Student student) {
         studentRepository.updateStudent(student);
     }
+
+    public void insertStudent(Student student) {
+        studentRepository.insertStudent(student);
+    }
 }
