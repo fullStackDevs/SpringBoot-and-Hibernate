@@ -1,9 +1,6 @@
 package com.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,10 +30,12 @@ public class Student {
 
 
     @ManyToMany(cascade = CascadeType.ALL)
-    //@JsonManagedReference
-//    @JsonIdentityInfo(
-//            generator = ObjectIdGenerators.PropertyGenerator.class,
-//            property = "id")
+    //@JsonManagedReference  ---> Elimina bucla insa nu pot trimite JSON corect pt creare de obiecte noi sau update
+    //@JsonIdentityInfo merge pt relatii One to One insa nu si pt Many to Many
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
+//    @JsonIgnore
     private List<Course> courses = new ArrayList<Course>();
 
     public int getId() {
