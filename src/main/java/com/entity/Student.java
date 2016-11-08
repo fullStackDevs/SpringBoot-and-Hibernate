@@ -29,12 +29,12 @@ public class Student {
 
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     //@JsonManagedReference  ---> Elimina bucla insa nu pot trimite JSON corect pt creare de obiecte noi sau update
     //@JsonIdentityInfo merge pt relatii One to One insa nu si pt Many to Many
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id")
+            property = "id", scope = Student.class)
 //    @JsonIgnore
     private List<Course> courses = new ArrayList<Course>();
 

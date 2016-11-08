@@ -29,12 +29,12 @@ public class Course {
     @Column(name = "start_date")
     private Date startDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "courses")
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "courses")
     //@JsonBackReference
     //@JsonIdentityInfo ---> merge pt relatii One to One insa nu si pt Many to Many
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id")
+            property = "id", scope = Course.class)
  //   @JsonIgnore
     private List<Student> students = new ArrayList<Student>();
 
