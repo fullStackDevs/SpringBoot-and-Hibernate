@@ -40,6 +40,7 @@ public class StudentService {
 
     private Student studentDTOtoStudent(StudentDTO studentDTO) {
         Student student = new Student();
+        // not set because it will be generated in the db
         student.setFirstName(studentDTO.getFirstName());
         student.setLastName(studentDTO.getLastName());
         student.setCourses(studentDTO.getCourses());
@@ -48,6 +49,7 @@ public class StudentService {
 
     private StudentDTO studentToStudentDTO(Student student){
         StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(student.getId());
         studentDTO.setFirstName(student.getFirstName());
         studentDTO.setLastName(student.getLastName());
         studentDTO.setCourses(student.getCourses());
