@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.dto.StudentDTO;
 import com.entity.Car;
 import com.entity.Course;
 import com.entity.Student;
@@ -34,9 +35,8 @@ public class MainController {
     }
 
     @RequestMapping(value = "/students", method = RequestMethod.GET)
-    public Collection<Student> getAllStudents(){
-        Collection<Student> results = studentService.getAll();
-        System.out.println(results.toString());
+    public Collection<StudentDTO> getAllStudents(){
+        Collection<StudentDTO> results = studentService.getAll();
         return results;
     }
 
@@ -62,8 +62,9 @@ public class MainController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public void insertStudent(@RequestBody Student st){
-        studentService.insertStudent(st);
+    public void insertStudent(@RequestBody StudentDTO studentDTO){
+        studentService.insertStudent(studentDTO);
+        System.out.println("### Output -- insert student method called");
     }
 
     @RequestMapping(value = "/dcar", method = RequestMethod.GET)

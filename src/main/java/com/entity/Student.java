@@ -29,12 +29,13 @@ public class Student {
 
 
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.MERGE) // -- cu CascadeType.MERGE functioneaza sa adaug studenti noi insa cu ALL sau PERSIST nu functioneaza
     //@JsonManagedReference  ---> Elimina bucla insa nu pot trimite JSON corect pt creare de obiecte noi sau update
+//    @JsonManagedReference  ---> Daca las adnotarea asta cand folosesc DTO da eroare (ceva de JSON...UTF8...not supported). Daca scot adnotarea insa merge
     //@JsonIdentityInfo merge pt relatii One to One insa nu si pt Many to Many
-    @JsonIdentityInfo(
-            generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id", scope = Student.class)
+//    @JsonIdentityInfo(
+//            generator = ObjectIdGenerators.PropertyGenerator.class,
+//            property = "id", scope = Student.class)
 //    @JsonIgnore
     private List<Course> courses = new ArrayList<Course>();
 
