@@ -28,4 +28,8 @@ public class StudentService {
             studentRepository.removeStudentById(id);
         }
     }
+
+    public void createStudent(Student student) {
+            studentRepository.createStudent(student);
+    }
 }

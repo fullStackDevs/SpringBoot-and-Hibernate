@@ -1,6 +1,7 @@
 package com.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -30,8 +31,9 @@ public class Course {
     @Column(name = "start_date")
     private Date startDate;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "courses")
-    @JsonBackReference
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "courses")
+    //@JsonBackReference
+    @JsonIgnore
     private List<Student> students = new ArrayList<Student>();
 
 

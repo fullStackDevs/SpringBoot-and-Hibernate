@@ -54,6 +54,13 @@ public class MainController {
         studentService.removeStudentById(id);
     }
 
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public void createStudent(@RequestBody Student student){
+        System.out.println("Creating student...");
+        studentService.createStudent(student);
+
+    }
+
 
 
 }

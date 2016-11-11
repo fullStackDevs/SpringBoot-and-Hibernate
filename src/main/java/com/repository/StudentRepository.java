@@ -40,4 +40,8 @@ public class StudentRepository {
         Student student = em.find(Student.class, id);
         em.remove(student);
     }
+
+    public void createStudent(Student student) {
+        em.persist(student);
+    }
 }

@@ -30,8 +30,8 @@ public class Student {
 
 
 
-    @ManyToMany
-    @JsonManagedReference
+    @ManyToMany(cascade = CascadeType.MERGE)
+    //@JsonManagedReference
     private List<Course> courses = new ArrayList<Course>();
 
     public int getId() {
