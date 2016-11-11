@@ -29,13 +29,17 @@ public class Course {
     @Column(name = "start_date")
     private Date startDate;
 
-    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "courses")
- //   @JsonBackReference ---> Daca las adnotarea asta cand folosesc DTO da eroare (ceva de JSON...UTF8...not supported). Daca scot adnotarea insa merge
+  //   @JsonBackReference ---> Daca las adnotarea asta cand folosesc DTO da eroare (ceva de JSON...UTF8...not supported). Daca scot adnotarea insa merge
     //@JsonIdentityInfo ---> merge pt relatii One to One insa nu si pt Many to Many
 //    @JsonIdentityInfo(
 //            generator = ObjectIdGenerators.PropertyGenerator.class,
 //            property = "id", scope = Course.class)
 
+    //###***###
+        //Putem sa nu folosim deloc DTO si sa folosim doar "@JsonIgnore" si "CascadeType.MERGE" si vor functiona ok toate operatiunile
+        // (nu vom avea bucla infinita la parsarea JSON-ului, va merge sa facem POST, GET, DELETE)
+    //###***###
+    @ManyToMany(cascade = CascadeType.MERGE, mappedBy = "courses")
     @JsonIgnore // ---> chiar daca folosim DTO trebuie sa punem si adnotarea "@JsonIgnore" pentru a nu intra in bucla infinita cand se sederializeaza raspunsul in fornt end
     private List<Student> students = new ArrayList<Student>();
 
