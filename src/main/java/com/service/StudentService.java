@@ -4,6 +4,7 @@ import com.dto.StudentDTO;
 import com.entity.Student;
 import com.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,6 +13,7 @@ import java.util.*;
 public class StudentService {
 
     @Autowired
+    @Qualifier("studentRepositorySQLimpl")
     private StudentRepository studentRepository;
 
     public Collection<StudentDTO> getAll(){

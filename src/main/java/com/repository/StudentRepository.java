@@ -1,51 +1,23 @@
 package com.repository;
 
 import com.entity.Student;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
 import java.util.Collection;
-import java.util.List;
 
+/**
+ * Created by pbirzu on 11/11/2016.
+ */
+public interface StudentRepository {
+    void setEm(EntityManager em);
 
+    Collection<Student> getAll();
 
-@Repository
-@Transactional
-public class StudentRepository {
+    Student getStudentById(int id);
 
-    @PersistenceContext
-    EntityManager em;
+    void removeStudentById(int id);
 
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
+    void updateStudent(Student student);
 
-    public Collection<Student> getAll(){
-        TypedQuery<Student> query = em.createNamedQuery(Student.FIND_ALL, Student.class);
-        Collection<Student> results = query.getResultList();
-
-        //return query.getResultList();
-        return results;
-    }
-
-    public Student getStudentById(int id) {
-        TypedQuery<Student> query = em.createNamedQuery(Student.FIND_BY_ID, Student.class);
-        query.setParameter("1", id);
-        return query.getSingleResult();
-    }
-
-    public void removeStudentById(int id) {
-       //Student student = getStudentById(id);
-        Student student = em.find(Student.class, id);
-        em.remove(student);
-    }
-
-    public void updateStudent(Student student) {
-        em.merge(student);
-    }
-
-    public void insertStudent(Student student) {
-        em.persist(student);
-    }
+    void insertStudent(Student student);
 }
